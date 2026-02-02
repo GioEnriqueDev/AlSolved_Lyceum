@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { MagneticButton } from "@/components/reactbits/MagneticButton";
+import Link from "next/link";
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +24,7 @@ export default function MarketingLayout({
                 <SmoothScroll>
                     <header className="fixed top-0 w-full z-50 transition-all duration-300 glass-panel border-b-0 rounded-none bg-slate-950/80 backdrop-blur-md">
                         <div className="container mx-auto px-6 h-20 flex justify-between items-center">
-                            <a href="/" className="flex items-center">
+                            <Link href="/" className="flex items-center">
                                 {/* Marketing Mindset: Larger, clearer logo establishing immediate authority */}
                                 <div className="relative w-40 h-12 md:w-48 md:h-16 filter drop-shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:scale-105 transition-transform duration-300">
                                     <Image
@@ -34,18 +35,18 @@ export default function MarketingLayout({
                                         priority
                                     />
                                 </div>
-                            </a>
+                            </Link>
                             <nav className="space-x-8 hidden md:flex">
-                                <a href="/" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Home</a>
-                                <a href="/servizi" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">I Nostri Servizi</a>
-                                <a href="/dove-siamo" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Dove Siamo</a>
-                                <a href="/amministrazione" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Amministrazione</a>
+                                <Link href="/" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Home</Link>
+                                <Link href="/#servizi" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">I Nostri Servizi</Link>
+                                <Link href="/dove-siamo" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Dove Siamo</Link>
+                                <Link href="/amministrazione" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Amministrazione</Link>
                             </nav>
-                            <a href="/#booking">
+                            <Link href="/#booking">
                                 <MagneticButton className="px-6 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white transition-all text-[10px] font-bold uppercase tracking-widest backdrop-blur-md hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]">
                                     Contattaci
                                 </MagneticButton>
-                            </a>
+                            </Link>
                         </div>
                     </header>
                     <main className="min-h-screen bg-slate-950 text-slate-200 selection:bg-secondary selection:text-slate-950">
