@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  basePath: "/alsolved_lyceum",
-  assetPrefix: "/alsolved_lyceum",
+  basePath: "/AlSolved_Lyceum",
+  assetPrefix: "/AlSolved_Lyceum",
 };
 
 export default nextConfig;
