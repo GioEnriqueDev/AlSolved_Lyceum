@@ -39,7 +39,7 @@ export default function MarketingLayout({
                             <nav className="space-x-8 hidden md:flex">
                                 <Link href="/" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Home</Link>
                                 <Link href="/#servizi" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">I Nostri Servizi</Link>
-                                <Link href="/#dove-siamo" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Dove Siamo</Link>
+                                <Link href="/dove-siamo" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Dove Siamo</Link>
                                 <Link href="/amministrazione" className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white transition-colors hover:text-glow">Amministrazione</Link>
                             </nav>
                             <Link href="/#booking">
