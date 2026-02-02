@@ -28,7 +28,7 @@ export default function MarketingLayout({
                                 {/* Marketing Mindset: Larger, clearer logo establishing immediate authority */}
                                 <div className="relative w-40 h-12 md:w-48 md:h-16 filter drop-shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:scale-105 transition-transform duration-300">
                                     <Image
-                                        src="/logo-transparent.png"
+                                        src="/AlSolved_Lyceum/logo-transparent.png"
                                         alt="Lyceum Fisioterapia"
                                         fill
                                         className="object-contain object-left md:object-center"

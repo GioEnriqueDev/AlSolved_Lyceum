@@ -21,7 +21,7 @@ export const CinematicLogo = () => {
             {/* The Logo Container */}
             <div className="relative w-48 h-48 md:w-60 md:h-60 z-10 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
                 <Image
-                    src="/logo-transparent.png"
+                    src="/AlSolved_Lyceum/logo-transparent.png"
                     alt="Lyceum Cinematic Logo"
                     fill
                     className="object-contain"
