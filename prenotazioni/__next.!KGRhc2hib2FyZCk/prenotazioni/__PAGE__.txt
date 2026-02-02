@@ -1,5 +1,0 @@
-1:"$Sreact.fragment"
-2:I[6000,["/AlSolved_Lyceum/_next/static/chunks/25dde51e17b2a322.js","/AlSolved_Lyceum/_next/static/chunks/93a311df3e4415cd.js"],"OutletBoundary"]
-3:"$Sreact.suspense"
-0:{"buildId":"EWBZRL2v4EugJZQUJxQkb","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"space-y-6","children":[["$","h2",null,{"className":"text-3xl font-bold tracking-tight text-primary","children":"Prenotazioni"}],["$","p",null,{"className":"text-muted-foreground","children":"Gestisci qui i tuoi appuntamenti."}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
-4:null

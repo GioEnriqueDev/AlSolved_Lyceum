@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[37901,["/AlSolved_Lyceum/_next/static/chunks/afc7eb0d6b71dade.js","/AlSolved_Lyceum/_next/static/chunks/5d0ea0c26829baf5.js","/AlSolved_Lyceum/_next/static/chunks/5478e3bb76167374.js"],"LocationSection"]
-3:I[6000,["/AlSolved_Lyceum/_next/static/chunks/25dde51e17b2a322.js","/AlSolved_Lyceum/_next/static/chunks/93a311df3e4415cd.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"buildId":"EWBZRL2v4EugJZQUJxQkb","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"bg-slate-950 min-h-screen pt-20","children":["$","$L2",null,{}]}],[["$","script","script-0",{"src":"/AlSolved_Lyceum/_next/static/chunks/5478e3bb76167374.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
-5:null

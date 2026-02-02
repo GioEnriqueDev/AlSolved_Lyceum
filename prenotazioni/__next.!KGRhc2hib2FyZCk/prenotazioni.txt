@@ -1,4 +1,0 @@
-1:"$Sreact.fragment"
-2:I[18119,["/AlSolved_Lyceum/_next/static/chunks/25dde51e17b2a322.js","/AlSolved_Lyceum/_next/static/chunks/93a311df3e4415cd.js"],"default"]
-3:I[1137,["/AlSolved_Lyceum/_next/static/chunks/25dde51e17b2a322.js","/AlSolved_Lyceum/_next/static/chunks/93a311df3e4415cd.js"],"default"]
-0:{"buildId":"EWBZRL2v4EugJZQUJxQkb","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
