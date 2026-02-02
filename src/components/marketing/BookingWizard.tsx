@@ -41,7 +41,7 @@ export const BookingWizard = () => {
         if (!selectedService || !date || !selectedTime) return;
         const formattedDate = format(date, "d MMMM yyyy", { locale: it });
         const message = `Salve, vorrei confermare l'appuntamento:\n\n📅 Data: ${formattedDate}\n🕒 Ora: ${selectedTime}\nseduta di ${selectedService.title}.\n\nAttendo conferma.`;
-        window.open(`https://wa.me/393330000000?text=${encodeURIComponent(message)}`, '_blank');
+        window.open(`https://wa.me/393491119147?text=${encodeURIComponent(message)}`, '_blank');
     };
 
     return (
@@ -137,10 +137,10 @@ export const BookingWizard = () => {
                                                             disabled={!available}
                                                             onClick={() => setSelectedTime(time)}
                                                             className={`py-2 px-3 rounded-lg text-sm font-medium transition-all ${!available
-                                                                    ? 'bg-slate-900/30 text-slate-600 cursor-not-allowed line-through'
-                                                                    : selectedTime === time
-                                                                        ? 'bg-primary text-white shadow-lg scale-105'
-                                                                        : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
+                                                                ? 'bg-slate-900/30 text-slate-600 cursor-not-allowed line-through'
+                                                                : selectedTime === time
+                                                                    ? 'bg-primary text-white shadow-lg scale-105'
+                                                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
                                                                 }`}
                                                         >
                                                             {time}
