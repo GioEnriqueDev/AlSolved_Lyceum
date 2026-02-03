@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -8,28 +7,17 @@ import { MagneticButton } from "@/components/reactbits/MagneticButton";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/#servizi", label: "I Nostri Servizi" },
+    { href: "/#servizi", label: "Servizi" },
     { href: "/dove-siamo", label: "Dove Siamo" },
     { href: "/chi-siamo", label: "Chi Siamo" },
 ];
-
-// ─── Scroll Progress Indicator ───
-function ScrollProgress() {
-    const { scrollYProgress } = useScroll();
-    return (
-        <motion.div
-            className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 via-primary-400 to-secondary z-[100] origin-left"
-            style={{ scaleX: scrollYProgress }}
-        />
-    );
-}
 
 // ─── Mobile Menu ───
 function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -37,7 +25,6 @@ function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         <AnimatePresence>
             {isOpen && (
                 <>
-                    {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -46,57 +33,41 @@ function MobileMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
                         onClick={onClose}
                     />
 
-                    {/* Menu Panel */}
                     <motion.div
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed top-0 right-0 bottom-0 w-80 bg-white/95 backdrop-blur-xl z-50 md:hidden shadow-2xl"
+                        transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                        className="fixed top-0 right-0 bottom-0 w-72 bg-white z-50 md:hidden shadow-2xl"
                     >
-                        {/* Close Button */}
                         <button
                             onClick={onClose}
-                            className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100 transition-colors"
+                            className="absolute top-5 right-5 p-2 rounded-full hover:bg-gray-100 transition-colors"
                         >
-                            <X className="w-6 h-6 text-gray-600" />
+                            <X className="w-5 h-5 text-gray-600" />
                         </button>
 
-                        {/* Menu Content */}
-                        <div className="flex flex-col h-full pt-24 px-8">
-                            <nav className="flex flex-col gap-2">
-                                {navLinks.map((link, i) => (
-                                    <motion.div
+                        <div className="flex flex-col h-full pt-20 px-6">
+                            <nav className="flex flex-col gap-1">
+                                {navLinks.map((link) => (
+                                    <Link
                                         key={link.href}
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: i * 0.1 }}
+                                        href={link.href}
+                                        onClick={onClose}
+                                        className="py-3 px-4 rounded-lg text-gray-700 hover:text-primary-700 hover:bg-primary-50 transition-colors font-medium"
                                     >
-                                        <Link
-                                            href={link.href}
-                                            onClick={onClose}
-                                            className="group flex items-center justify-between py-4 px-4 rounded-xl text-gray-700 hover:text-primary-700 hover:bg-primary-50 transition-all duration-300"
-                                        >
-                                            <span className="text-lg font-medium">{link.label}</span>
-                                            <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
-                                        </Link>
-                                    </motion.div>
+                                        {link.label}
+                                    </Link>
                                 ))}
                             </nav>
 
-                            {/* CTA Button */}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 }}
-                                className="mt-auto mb-12"
-                            >
+                            <div className="mt-auto mb-8">
                                 <Link href="/#booking" onClick={onClose}>
-                                    <div className="w-full py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white rounded-2xl font-bold text-center shadow-glow hover:shadow-glow-lg transition-shadow">
+                                    <div className="w-full py-3 bg-gradient-to-r from-primary-600 to-primary-500 text-white rounded-xl font-bold text-center text-sm">
                                         Prenota Ora
                                     </div>
                                 </Link>
-                            </motion.div>
+                            </div>
                         </div>
                     </motion.div>
                 </>
@@ -112,68 +83,56 @@ export default function MarketingLayout({
 }) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const { scrollY } = useScroll();
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
-        setScrolled(latest > 50);
-    });
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-    // Prevent body scroll when mobile menu is open
     useEffect(() => {
         if (mobileMenuOpen) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "";
         }
-        return () => {
-            document.body.style.overflow = "";
-        };
+        return () => { document.body.style.overflow = ""; };
     }, [mobileMenuOpen]);
 
     return (
         <html lang="it">
             <body className={inter.className}>
                 <SmoothScroll>
-                    {/* Scroll Progress */}
-                    <ScrollProgress />
-
                     {/* ─── Header ─── */}
-                    <motion.header
-                        initial={{ y: -100 }}
-                        animate={{ y: 0 }}
-                        transition={{ type: "spring", damping: 20, stiffness: 100 }}
-                        className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled
-                                ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-primary-500/5 border-b border-gray-100"
+                    <header
+                        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
+                                ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100"
                                 : "bg-transparent"
                             }`}
                     >
-                        <div className="container mx-auto px-6 h-20 flex justify-between items-center">
+                        <div className="container mx-auto px-4 sm:px-6 h-16 sm:h-18 flex justify-between items-center">
                             {/* Logo */}
-                            <Link href="/" className="flex items-center group">
-                                <motion.div
-                                    className="relative w-40 h-12 md:w-48 md:h-14"
-                                    whileHover={{ scale: 1.05 }}
-                                    transition={{ type: "spring", stiffness: 400 }}
-                                >
+                            <Link href="/" className="flex items-center">
+                                <div className="relative w-32 h-10 sm:w-40 sm:h-12">
                                     <Image
                                         src="/AlSolved_Lyceum/logo-transparent.png"
                                         alt="Lyceum Fisioterapia"
                                         fill
-                                        className="object-contain object-left md:object-center drop-shadow-sm"
+                                        className="object-contain object-left"
                                         priority
                                     />
-                                    {/* Glow effect on hover */}
-                                    <div className="absolute inset-0 bg-primary-500/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                </motion.div>
+                                </div>
                             </Link>
 
                             {/* Desktop Navigation */}
-                            <nav className="hidden md:flex items-center gap-8">
+                            <nav className="hidden md:flex items-center gap-6">
                                 {navLinks.map((link) => (
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className={`nav-link text-sm font-semibold uppercase tracking-wider transition-colors duration-300 ${scrolled ? "text-gray-600 hover:text-primary-600" : "text-gray-700 hover:text-primary-600"
+                                        className={`text-sm font-medium transition-colors ${scrolled ? "text-gray-600 hover:text-primary-600" : "text-gray-700 hover:text-primary-600"
                                             }`}
                                     >
                                         {link.label}
@@ -181,72 +140,59 @@ export default function MarketingLayout({
                                 ))}
                             </nav>
 
-                            {/* CTA Button + Mobile Menu Toggle */}
-                            <div className="flex items-center gap-4">
+                            {/* CTA + Mobile Toggle */}
+                            <div className="flex items-center gap-3">
                                 <Link href="/#booking" className="hidden md:block">
-                                    <MagneticButton className="px-6 py-2.5 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white rounded-full text-xs font-bold uppercase tracking-widest shadow-glow hover:shadow-glow-lg transition-all duration-300">
+                                    <MagneticButton className="px-5 py-2 bg-gradient-to-r from-primary-600 to-primary-500 text-white rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-shadow">
                                         Contattaci
                                     </MagneticButton>
                                 </Link>
 
-                                {/* Mobile Menu Button */}
                                 <button
                                     onClick={() => setMobileMenuOpen(true)}
-                                    className={`md:hidden p-2 rounded-lg transition-colors ${scrolled ? "hover:bg-gray-100" : "hover:bg-white/10"
-                                        }`}
+                                    className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
                                 >
-                                    <Menu className={`w-6 h-6 ${scrolled ? "text-gray-700" : "text-gray-700"}`} />
+                                    <Menu className="w-5 h-5 text-gray-700" />
                                 </button>
                             </div>
                         </div>
-                    </motion.header>
+                    </header>
 
-                    {/* Mobile Menu */}
                     <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
                     {/* ─── Main Content ─── */}
-                    <main className="min-h-screen bg-background text-foreground selection:bg-primary-200 selection:text-primary-900">
+                    <main className="min-h-screen bg-white text-gray-900">
                         {children}
                     </main>
 
                     {/* ─── Footer ─── */}
-                    <footer className="relative py-20 bg-gradient-to-b from-white to-gray-50 border-t border-gray-100 overflow-hidden">
-                        {/* Background Pattern */}
-                        <div className="absolute inset-0 bg-gradient-mesh opacity-30 pointer-events-none" />
-
-                        {/* Floating Decorative Elements */}
-                        <div className="absolute top-10 right-10 w-32 h-32 bg-primary-500/5 rounded-full blur-3xl animate-float" />
-                        <div className="absolute bottom-10 left-10 w-40 h-40 bg-secondary/5 rounded-full blur-3xl animate-float-delayed" />
-
-                        <div className="container mx-auto px-6 relative z-10">
-                            <div className="grid md:grid-cols-4 gap-12 mb-16">
-                                {/* Brand Column */}
-                                <div className="md:col-span-2">
-                                    <div className="relative w-40 h-12 mb-6">
+                    <footer className="py-16 bg-gray-50 border-t border-gray-100">
+                        <div className="container mx-auto px-4 sm:px-6">
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                                {/* Brand */}
+                                <div className="sm:col-span-2 lg:col-span-1">
+                                    <div className="relative w-32 h-10 mb-4">
                                         <Image
                                             src="/AlSolved_Lyceum/logo-transparent.png"
-                                            alt="Lyceum Fisioterapia"
+                                            alt="Lyceum"
                                             fill
                                             className="object-contain object-left"
                                         />
                                     </div>
-                                    <p className="text-gray-500 max-w-sm leading-relaxed">
-                                        Il punto di incontro tra riabilitazione avanzata e cura della persona.
-                                        Benvenuti nel futuro della fisioterapia.
+                                    <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
+                                        Riabilitazione avanzata e cura della persona dal 1998.
                                     </p>
                                 </div>
 
-                                {/* Links Column */}
+                                {/* Links */}
                                 <div>
-                                    <h4 className="text-sm font-bold uppercase tracking-widest text-gray-900 mb-6">
-                                        Link Rapidi
-                                    </h4>
-                                    <ul className="space-y-3">
+                                    <h4 className="text-sm font-bold text-gray-900 mb-4">Link Rapidi</h4>
+                                    <ul className="space-y-2">
                                         {navLinks.map((link) => (
                                             <li key={link.href}>
                                                 <Link
                                                     href={link.href}
-                                                    className="text-gray-500 hover:text-primary-600 transition-colors"
+                                                    className="text-sm text-gray-500 hover:text-primary-600 transition-colors"
                                                 >
                                                     {link.label}
                                                 </Link>
@@ -255,33 +201,40 @@ export default function MarketingLayout({
                                     </ul>
                                 </div>
 
-                                {/* Contact Column */}
+                                {/* Contact */}
                                 <div>
-                                    <h4 className="text-sm font-bold uppercase tracking-widest text-gray-900 mb-6">
-                                        Contatti
-                                    </h4>
-                                    <ul className="space-y-3 text-gray-500">
+                                    <h4 className="text-sm font-bold text-gray-900 mb-4">Contatti</h4>
+                                    <ul className="space-y-2 text-sm text-gray-500">
                                         <li>Via Torri in Sabina 20</li>
                                         <li>00199 Roma (RM)</li>
-                                        <li className="pt-2">
+                                        <li className="pt-1">
                                             <a href="tel:+393491119147" className="hover:text-primary-600 transition-colors">
                                                 +39 349 111 9147
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
+
+                                {/* Hours */}
+                                <div>
+                                    <h4 className="text-sm font-bold text-gray-900 mb-4">Orari</h4>
+                                    <ul className="space-y-2 text-sm text-gray-500">
+                                        <li>Lun - Ven: 09:00 - 19:00</li>
+                                        <li>Sab - Dom: Chiuso</li>
+                                    </ul>
+                                </div>
                             </div>
 
-                            {/* Bottom Bar */}
-                            <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
-                                <p className="text-xs text-gray-400 uppercase tracking-widest">
+                            {/* Bottom */}
+                            <div className="pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                                <p className="text-xs text-gray-400">
                                     © 2026 Lyceum Fisioterapia. Tutti i diritti riservati.
                                 </p>
-                                <div className="flex gap-6">
-                                    <a href="#" className="text-xs text-gray-400 hover:text-primary-600 transition-colors uppercase tracking-wide">
+                                <div className="flex gap-4">
+                                    <a href="#" className="text-xs text-gray-400 hover:text-primary-600 transition-colors">
                                         Privacy Policy
                                     </a>
-                                    <a href="#" className="text-xs text-gray-400 hover:text-primary-600 transition-colors uppercase tracking-wide">
+                                    <a href="#" className="text-xs text-gray-400 hover:text-primary-600 transition-colors">
                                         Cookie Policy
                                     </a>
                                 </div>

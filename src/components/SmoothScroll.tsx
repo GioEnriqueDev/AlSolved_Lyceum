@@ -15,15 +15,13 @@ function AnchorScrollHandler() {
             const href = link.getAttribute('href');
             if (!href) return;
 
-            // Handle both "#id" and "/#id" (if we are on the homepage)
             if (href.startsWith('#') || (href.startsWith('/#') && window.location.pathname === '/')) {
                 const id = href.startsWith('/') ? href.substring(1) : href;
                 const element = document.querySelector(id);
 
                 if (element && lenis) {
                     e.preventDefault();
-                    lenis.scrollTo(element, { offset: 0, duration: 2 });
-                    // Optionally update URL without jump
+                    lenis.scrollTo(element, { offset: -80, duration: 1.2 });
                     window.history.pushState({}, '', id);
                 }
             }
@@ -38,7 +36,16 @@ function AnchorScrollHandler() {
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
     return (
-        <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+        <ReactLenis
+            root
+            options={{
+                lerp: 0.12,      // Faster response (was 0.1)
+                duration: 1.0,   // Shorter duration (was 1.5)
+                smoothWheel: true,
+                wheelMultiplier: 1.2,  // Faster wheel scroll
+                touchMultiplier: 2,    // Faster touch scroll
+            }}
+        >
             <AnchorScrollHandler />
             {children}
         </ReactLenis>
