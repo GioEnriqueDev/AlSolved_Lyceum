@@ -1,5 +1,5 @@
 1:"$Sreact.fragment"
 2:I[97367,["/AlSolved_Lyceum/_next/static/chunks/ff1a16fafef87110.js","/AlSolved_Lyceum/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
 3:"$Sreact.suspense"
-0:{"buildId":"uWFoLU9T6zMUQRpjI8Vgg","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"space-y-6","children":[["$","h2",null,{"className":"text-3xl font-bold tracking-tight text-primary","children":"Prenotazioni"}],["$","p",null,{"className":"text-muted-foreground","children":"Gestisci qui i tuoi appuntamenti."}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"ZuLv5iG78YZbhGn0mPCee","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"space-y-6","children":[["$","h2",null,{"className":"text-3xl font-bold tracking-tight text-primary","children":"Prenotazioni"}],["$","p",null,{"className":"text-muted-foreground","children":"Gestisci qui i tuoi appuntamenti."}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
 4:null
