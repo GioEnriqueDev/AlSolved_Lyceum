@@ -14,38 +14,38 @@ interface Shape {
 }
 
 const shapeColors = [
-    "rgba(139, 92, 246, 0.08)",   // Violet - reduced opacity
-    "rgba(167, 139, 250, 0.06)",  // Light Violet
-    "rgba(20, 184, 166, 0.06)",   // Teal
+    "rgba(139, 92, 246, 0.05)",   // Very faint violet
+    "rgba(167, 139, 250, 0.04)",  // Very faint light violet
 ];
 
-// Generate fewer, simpler shapes
+// Generate minimal shapes
 function generateShapes(count: number): Shape[] {
     const shapes: Shape[] = [];
 
     for (let i = 0; i < count; i++) {
         shapes.push({
             id: i,
-            size: 80 + Math.random() * 150,
-            x: 10 + (i * 25) % 80,  // More spread out
-            y: 10 + Math.random() * 80,
-            duration: 20 + Math.random() * 10, // Slower = less CPU
+            size: 100 + Math.random() * 100,
+            x: 10 + (i * 40) % 90,
+            y: 20 + Math.random() * 60,
+            duration: 25, // Very slow constant movement
             color: shapeColors[i % shapeColors.length],
-            blur: 40 + Math.random() * 30,
+            blur: 50,
         });
     }
     return shapes;
 }
 
-export default function FloatingShapes({ count = 5 }: { count?: number }) {
-    const shapes = useMemo(() => generateShapes(Math.min(count, 6)), [count]);
+export default function FloatingShapes({ count = 3 }: { count?: number }) {
+    // Force max 3 shapes regardless of prop to ensure performance
+    const shapes = useMemo(() => generateShapes(Math.min(count, 3)), [count]);
 
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none translate-z-0">
             {shapes.map((shape) => (
-                <motion.div
+                <div
                     key={shape.id}
-                    className="absolute rounded-full will-change-transform"
+                    className="absolute rounded-full will-change-transform animate-float-slow"
                     style={{
                         left: `${shape.x}%`,
                         top: `${shape.y}%`,
@@ -53,15 +53,7 @@ export default function FloatingShapes({ count = 5 }: { count?: number }) {
                         height: shape.size,
                         background: shape.color,
                         filter: `blur(${shape.blur}px)`,
-                    }}
-                    animate={{
-                        y: [0, -15, 0],
-                        scale: [1, 1.05, 1],
-                    }}
-                    transition={{
-                        duration: shape.duration,
-                        repeat: Infinity,
-                        ease: "easeInOut",
+                        animationDuration: `${shape.duration}s`,
                     }}
                 />
             ))}

@@ -15,13 +15,15 @@ function AnchorScrollHandler() {
             const href = link.getAttribute('href');
             if (!href) return;
 
+            // Only handle internal links
             if (href.startsWith('#') || (href.startsWith('/#') && window.location.pathname === '/')) {
                 const id = href.startsWith('/') ? href.substring(1) : href;
                 const element = document.querySelector(id);
 
                 if (element && lenis) {
                     e.preventDefault();
-                    lenis.scrollTo(element, { offset: -80, duration: 1.2 });
+                    // Instant scroll or very fast scroll to avoid "fighting" the user
+                    lenis.scrollTo(element as HTMLElement, { offset: -80, duration: 1.0, immediate: false });
                     window.history.pushState({}, '', id);
                 }
             }
@@ -39,15 +41,16 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         <ReactLenis
             root
             options={{
-                lerp: 0.12,      // Faster response (was 0.1)
-                duration: 1.0,   // Shorter duration (was 1.5)
+                lerp: 0.15,      // Increased from 0.12 for more responsive/native feel
+                duration: 0.8,   // Reduced duration for snappier aim
                 smoothWheel: true,
-                wheelMultiplier: 1.2,  // Faster wheel scroll
-                touchMultiplier: 2,    // Faster touch scroll
+                wheelMultiplier: 1.0, // Reset to 1.0 to avoid unnatural speed
+                touchMultiplier: 1.5, // Reduced from 2
+                infinite: false,
             }}
         >
             <AnchorScrollHandler />
-            {children}
+            {children as any}
         </ReactLenis>
     );
 }
