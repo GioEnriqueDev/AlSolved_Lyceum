@@ -2,66 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
+/* =====================================================
+   LYCEUM - Premium Light Theme Design System
+   Based on Logo Colors: Violet/Purple (#7C3AED - #8B5CF6)
+   ===================================================== */
+
 @layer base {
   :root {
-    /* Base Light Mode - Clean Medical Look */
-    --background: 210 40% 98%;
-    /* Soft White/Gray */
-    --foreground: 222.2 84% 4.9%;
+    /* ─── Core Light Theme ─── */
+    --background: 0 0% 99%;
+    /* Pure White #FCFCFC */
+    --foreground: 224 71% 4%;
+    /* Deep Slate #0F172A */
 
-    /* Lyceum Purple - Based on Logo */
+    /* ─── Lyceum Purple Palette (Logo Based) ─── */
     --primary: 262 83% 58%;
-    /* Vivid Purple #8b5cf6 */
-    --primary-foreground: 210 40% 98%;
+    /* Vibrant Purple #8B5CF6 */
+    --primary-foreground: 0 0% 100%;
+    /* White */
 
-    /* Neon Teal - Accents */
+    /* ─── Teal Accent ─── */
     --secondary: 173 80% 40%;
-    --secondary-foreground: 210 40% 98%;
+    /* Medical Teal #14B8A6 */
+    --secondary-foreground: 0 0% 100%;
 
+    /* ─── UI Components ─── */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Pure White */
+    --card-foreground: 224 71% 4%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --popover-foreground: 224 71% 4%;
+
+    /* ─── Muted & Accent ─── */
+    --muted: 220 14% 96%;
+    /* Light Gray #F4F4F5 */
+    --muted-foreground: 220 9% 46%;
+    /* Medium Gray */
+    --accent: 262 83% 97%;
+    /* Very Light Purple #FAF5FF */
+    --accent-foreground: 262 83% 30%;
+    /* Dark Purple */
+
+    /* ─── Destructive ─── */
+    --destructive: 0 84% 60%;
+    /* Red */
+    --destructive-foreground: 0 0% 100%;
+
+    /* ─── Borders & Inputs ─── */
+    --border: 220 13% 91%;
+    /* Light Border */
+    --input: 220 13% 91%;
     --ring: 262 83% 58%;
-    /* Purple Ring */
+    /* Purple Focus Ring */
+
     --radius: 0.75rem;
+
+    /* ─── Custom Properties ─── */
+    --glow-purple: 0 0 40px rgba(139, 92, 246, 0.4);
+    --glow-purple-intense: 0 0 60px rgba(139, 92, 246, 0.6);
+    --gradient-purple: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #C4B5FD 100%);
+    --gradient-purple-teal: linear-gradient(135deg, #8B5CF6 0%, #14B8A6 100%);
   }
 
+  /* ─── Dark Mode (preserved for compatibility) ─── */
   .dark {
-    /* Deepest Slate - Matching bg-slate-950 */
     --background: 222 47% 5%;
-    /* #020617 */
     --foreground: 210 40% 98%;
-
-    --primary: 263 70% 50%;
-    /* Deep Purple */
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 173 70% 50%;
-    /* Bright Teal for dark mode */
-    --secondary-foreground: 222 47% 11%;
-
-    --card: 217 33% 17%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 173 80% 40%;
+    --secondary-foreground: 0 0% 100%;
+    --card: 217 33% 10%;
     --card-foreground: 210 40% 98%;
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
     --muted: 217 33% 17%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 262 83% 15%;
+    --accent-foreground: 262 83% 90%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 263 70% 50%;
+    --ring: 262 83% 58%;
   }
 }
 
@@ -70,23 +93,447 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground tracking-tight scroll-smooth;
+    @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* ─── Selection Styling ─── */
+  ::selection {
+    @apply bg-primary/20 text-primary;
+  }
+
+  /* ─── Custom Scrollbar ─── */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+    transition: background 0.3s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
   }
 }
 
+/* =====================================================
+   UTILITY CLASSES - Glass, Glow & Effects
+   ===================================================== */
+
 @layer utilities {
+
+  /* ─── Glass Panels (Light Mode) ─── */
   .glass-panel {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    @apply backdrop-blur-xl bg-white/70 border border-white/50;
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }
 
-  .glass-panel-dark {
-    @apply backdrop-blur-xl bg-slate-900/50 border border-slate-700/50 shadow-xl;
+  .glass-panel-solid {
+    @apply backdrop-blur-xl bg-white/90 border border-gray-200/50;
+    box-shadow:
+      0 4px 30px rgba(0, 0, 0, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .glass-purple {
+    @apply backdrop-blur-xl border;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0.03) 100%);
+    border-color: rgba(139, 92, 246, 0.2);
+    box-shadow:
+      0 4px 30px rgba(139, 92, 246, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  /* ─── Glow Effects ─── */
+  .glow-purple {
+    box-shadow: var(--glow-purple);
+  }
+
+  .glow-purple-intense {
+    box-shadow: var(--glow-purple-intense);
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
   }
+
+  .text-glow-intense {
+    text-shadow:
+      0 0 20px rgba(139, 92, 246, 0.6),
+      0 0 40px rgba(139, 92, 246, 0.4),
+      0 0 60px rgba(139, 92, 246, 0.2);
+  }
+
+  /* ─── Gradient Backgrounds ─── */
+  .bg-gradient-purple {
+    background: var(--gradient-purple);
+  }
+
+  .bg-gradient-purple-teal {
+    background: var(--gradient-purple-teal);
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+  }
+
+  .bg-gradient-mesh {
+    background:
+      radial-gradient(at 40% 20%, hsla(262, 83%, 58%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsla(173, 80%, 40%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, hsla(262, 83%, 80%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, hsla(262, 83%, 58%, 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(173, 80%, 40%, 0.1) 0px, transparent 50%);
+  }
+
+  /* ─── Border Gradient ─── */
+  .border-gradient-purple {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(135deg, #8B5CF6, #14B8A6) border-box;
+  }
+
+  /* ─── Text Gradient ─── */
+  .text-gradient-purple {
+    @apply text-transparent bg-clip-text;
+    background-image: var(--gradient-purple);
+  }
+
+  .text-gradient-purple-teal {
+    @apply text-transparent bg-clip-text;
+    background-image: var(--gradient-purple-teal);
+  }
+
+  /* ─── Shimmer Effect ─── */
+  .shimmer {
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(139, 92, 246, 0.1),
+        transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* ─── Float Animation ─── */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+
+  /* ─── Pulse Glow ─── */
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* ─── Morph Blob ─── */
+  .animate-morph {
+    animation: morph 8s ease-in-out infinite;
+  }
+
+  /* ─── Gradient Shift ─── */
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  /* ─── Spin Slow ─── */
+  .animate-spin-slow {
+    animation: spin 20s linear infinite;
+  }
+
+  /* ─── Scale on Hover ─── */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+  }
+
+  /* ─── Card 3D Tilt Base ─── */
+  .card-3d {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+}
+
+/* =====================================================
+   KEYFRAME ANIMATIONS
+   ===================================================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+  }
+}
+
+@keyframes morph {
+
+  0%,
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+
+  50% {
+    border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%;
+  }
+
+  75% {
+    border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes reveal-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce-subtle {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* ─── Line Scan Effect ─── */
+@keyframes scan-line {
+  0% {
+    top: -10%;
+  }
+
+  100% {
+    top: 110%;
+  }
+}
+
+/* ─── Confetti Burst ─── */
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotateZ(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-200px) rotateZ(720deg);
+    opacity: 0;
+  }
+}
+
+/* =====================================================
+   COMPONENT-SPECIFIC STYLES
+   ===================================================== */
+
+/* ─── Navigation Underline Effect ─── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-purple-teal);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ─── Button Glow on Hover ─── */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-purple-teal);
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  filter: blur(10px);
+}
+
+.btn-glow:hover::before {
+  opacity: 1;
+}
+
+/* ─── Card Spotlight Base ─── */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  transform: translate(-50%, -50%);
+}
+
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
+/* ─── Calendar Styling Override ─── */
+.rdp {
+  --rdp-accent-color: #8B5CF6 !important;
+  --rdp-background-color: rgba(139, 92, 246, 0.1) !important;
+}
+
+.rdp-day_selected {
+  background: linear-gradient(135deg, #8B5CF6, #7C3AED) !important;
+  color: white !important;
+}
+
+.rdp-day_today {
+  border: 2px solid #8B5CF6 !important;
+}
+
+/* ─── Progress Bar Gradient ─── */
+.progress-bar {
+  background: linear-gradient(90deg, #8B5CF6, #A78BFA, #14B8A6);
+  background-size: 200% 100%;
+  animation: gradient-shift 2s ease infinite;
+}
+
+/* ─── Scroll Progress Indicator ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gradient-purple-teal);
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
 }

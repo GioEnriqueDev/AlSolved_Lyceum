@@ -5,32 +5,57 @@ import Image from "next/image";
 
 export const CinematicLogo = () => {
     return (
-        <div className="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
-            {/* Cinematic Rotating Rim */}
+        <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+            {/* Glow Effect Behind Logo */}
             <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full border border-t-primary/50 border-r-transparent border-b-secondary/50 border-l-transparent w-full h-full opacity-50 blur-sm"
-            />
-            <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-4 rounded-full border border-t-transparent border-r-white/20 border-b-transparent border-l-white/20 w-[90%] h-[90%] opacity-30"
-            />
+                className="absolute inset-0 -z-10"
+                animate={{
+                    opacity: [0.3, 0.5, 0.3],
+                    scale: [1, 1.1, 1],
+                }}
+                transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                }}
+            >
+                <div className="w-full h-full bg-primary-500/20 blur-3xl rounded-full" />
+            </motion.div>
 
-            {/* The Logo Container */}
-            <div className="relative w-48 h-48 md:w-60 md:h-60 z-10 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+            {/* Logo Container */}
+            <motion.div
+                className="relative w-48 h-16 md:w-64 md:h-20"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 400 }}
+            >
                 <Image
                     src="/AlSolved_Lyceum/logo-transparent.png"
-                    alt="Lyceum Cinematic Logo"
+                    alt="Lyceum"
                     fill
-                    className="object-contain"
+                    className="object-contain drop-shadow-lg"
                     priority
                 />
-            </div>
+            </motion.div>
 
-            {/* Back Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary/40 rounded-full blur-[50px] animate-pulse z-0" />
-        </div>
+            {/* Subtle Shine Effect */}
+            <motion.div
+                className="absolute inset-0 overflow-hidden pointer-events-none rounded-lg"
+                initial={{ x: "-100%" }}
+                animate={{ x: "200%" }}
+                transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatDelay: 5,
+                    ease: "easeInOut",
+                }}
+            >
+                <div className="w-20 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12" />
+            </motion.div>
+        </motion.div>
     );
 };

@@ -12,7 +12,7 @@ Il design segue una filosofia **"Medical Premium"**, utilizzando toni scuri prof
 
 Il progetto è costruito su tecnologie moderne e performanti, ottimizzate per il SEO e la velocità di caricamento:
 
-*   **Framework Core:** [Next.js 15](https://nextjs.org/) (React 19) con TypeScript.
+qul*   **Framework Core:** [Next.js 15](https://nextjs.org/) (React 19) con TypeScript.
 *   **Styling:** [Tailwind CSS v3](https://tailwindcss.com/) per il layout e sistema di design custom (colori medici, gradienti).
 *   **Animazioni UI:** [Framer Motion](https://www.framer.com/motion/) per transizioni, entrate (FadeIn) e il Wizard di prenotazione.
 *   **Grafica 3D:** [React Three Fiber](https://docs.pmndrs.assets/react-three-fiber) + [Drei](https://github.com/pmndrs/drei) per lo sfondo particellare (DNA/Stelle).
